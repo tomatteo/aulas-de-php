@@ -19,30 +19,67 @@ class Conexao {
   }
 }
 
-$pdo = Conexao::get();
+// $pdo = Conexao::get();
 
-$sql = 'INSERT INTO produtos (nome, preco, estoque) VALUES (:nome, :preco, :estoque)';
-$stmt = $pdo->prepare($sql);
-$stmt->execute([
-  ':nome'    => 'Camiseta',
-  ':preco'   => 59.90,
-  ':estoque' => 10,
-]);
-echo 'Inserido com id ' . $pdo->lastInsertId();
+// $sql = 'INSERT INTO produtos (nome, preco, estoque) VALUES (:nome, :preco, :estoque)';
+// $stmt = $pdo->prepare($sql);
+// $stmt->execute([
+//   ':nome'    => 'Camiseta',
+//   ':preco'   => 59.90,
+//   ':estoque' => 10,
+// ]);
+// echo 'Inserido com id ' . $pdo->lastInsertId();
 
 
 
-$pdo = Conexao::get();
-$id = $_GET['id'];
-$sql = "SELECT * FROM produtos WHERE id = $id";
+// $pdo = Conexao::get();
+// $id = $_GET['id'];
+// $sql = "SELECT * FROM produtos WHERE id = $id";
 
-echo "<pre>SQL executado: $sql</pre>";
+// echo "<pre>SQL executado: $sql</pre>";
 
-$stmt = $pdo->query($sql);
-$stmt->execute([';id' => $id]);
+// $stmt = $pdo->query($sql);
+// $stmt->execute([';id' => $id]);
 
-foreach ($stmt as $produto) {
-    echo $produto['id'] . ' - ';
-    echo $produto['nome'] . ' - R$ ';
-    echo $produto['preco'] . '<br>';
-}
+// foreach ($stmt as $produto) {
+//     echo $produto['id'] . ' - ';
+//     echo $produto['nome'] . ' - R$ ';
+//     echo $produto['preco'] . '<br>';
+// }
+
+
+// // Atualizar produto
+// $pdo = Conexao::get();
+// $id = $_GET['id'];
+// $sql = "UPDATE produtos SET preco = :preco WHERE id = :id";
+
+// echo "<pre>SQL executado: $sql</pre>";
+
+// $stmt = $pdo->query($sql);
+// $stmt->execute([
+//   ':preco' => $_POST['preco'],
+//   ':id' => $id
+// ]);
+
+// foreach ($stmt as $produto) {
+//     echo $produto['id'] . ' - ';
+//     echo $produto['nome'] . ' - R$ ';
+//     echo $produto['preco'] . '<br>';
+// }
+
+// //delete produto
+
+// $pdo = Conexao::get();
+// $id = $_GET['id'];
+// $sql = "DELETE FROM produtos WHERE id = :id";
+
+// echo "<pre>SQL executado: $sql</pre>";
+
+// $stmt = $pdo->query($sql);
+// $stmt->execute([';id' => $id]);
+
+// foreach ($stmt as $produto) {
+//     echo $produto['id'] . ' - ';
+//     echo $produto['nome'] . ' - R$ ';
+//     echo $produto['preco'] . '<br>';
+// }

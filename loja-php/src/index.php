@@ -8,5 +8,5 @@ session_start();
     <li><a href="login.php">entrar</a></li>
     <li><a href="painel.php">Painel (restrito)</a></li>
     <li><a href="carrinho.php">Carrinho</a></li>
-    <li><a href="produtos.php">Sair</a></li>
+    <li><a href="produtos/index.php">Produtos</a></li>
 </ul>

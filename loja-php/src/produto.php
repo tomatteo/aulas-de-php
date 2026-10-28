@@ -44,4 +44,3 @@ class ProdutoComDesconto extends ProdutoFisico {
         return parent::total() * 0.9;
     }
 }
-```

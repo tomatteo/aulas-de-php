@@ -11,6 +11,9 @@ CREATE TABLE produtos (
   preco DECIMAL(10,2) NOT NULL,
   estoque INT NOT NULL DEFAULT 0,
   categoria_id INT,
+  tipo ENUM('fisico','digital') NOT NULL DEFAULT 'fisico',
+  peso_kg DECIMAL(6,3) NULL,
+  link_download VARCHAR(255) NULL,
   criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
