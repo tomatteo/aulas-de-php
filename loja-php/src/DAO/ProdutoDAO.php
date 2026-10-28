@@ -15,11 +15,14 @@ class ProdutoDAO {
              VALUES (:n, :p, :e, :t, :w, :l)'
         );
         $st->execute([
-            ':n' => $p->getNome(), ':p' => $p->getPreco(), ':e' => $p->getEstoque(),
+            ':n' => $p->getNome(),
+            ':p' => $p->getPreco(),
+            ':e' => $p->getEstoque(),
             ':t' => $p instanceof ProdutoDigital ? 'digital' : 'fisico',
             ':w' => $p instanceof ProdutoFisico ? $p->getPesoKg() : null,
             ':l' => $p instanceof ProdutoDigital ? $p->getLinkDownload() : null,
         ]);
+
         return (int) $this->pdo->lastInsertId();
     }
 
@@ -32,15 +35,21 @@ class ProdutoDAO {
         $st = $this->pdo->prepare('SELECT * FROM produtos WHERE id = :id');
         $st->execute([':id' => $id]);
         $linha = $st->fetch(PDO::FETCH_ASSOC);
+
         return $linha ? $this->hidratar($linha) : null;
     }
 
     public function atualizar(Produto $p): bool {
         $st = $this->pdo->prepare(
-            'UPDATE produtos SET nome=:n, preco=:p, estoque=:e, tipo=:t, peso_kg=:w, link_download=:l WHERE id=:id'
+            'UPDATE produtos
+             SET nome=:n, preco=:p, estoque=:e, tipo=:t, peso_kg=:w, link_download=:l
+             WHERE id=:id'
         );
+
         return $st->execute([
-            ':n' => $p->getNome(), ':p' => $p->getPreco(), ':e' => $p->getEstoque(),
+            ':n' => $p->getNome(),
+            ':p' => $p->getPreco(),
+            ':e' => $p->getEstoque(),
             ':t' => $p instanceof ProdutoDigital ? 'digital' : 'fisico',
             ':w' => $p instanceof ProdutoFisico ? $p->getPesoKg() : null,
             ':l' => $p instanceof ProdutoDigital ? $p->getLinkDownload() : null,
@@ -56,13 +65,20 @@ class ProdutoDAO {
     public function hidratar(array $linha): Produto {
         if (($linha['tipo'] ?? 'fisico') === 'digital') {
             return new ProdutoDigital(
-                (int) $linha['id'], $linha['nome'], (float) $linha['preco'],
-                (int) $linha['estoque'], (string) ($linha['link_download'] ?? '')
+                (int) $linha['id'],
+                $linha['nome'],
+                (float) $linha['preco'],
+                (int) $linha['estoque'],
+                (string) ($linha['link_download'] ?? '')
             );
         }
+
         return new ProdutoFisico(
-            (int) $linha['id'], $linha['nome'], (float) $linha['preco'],
-            (int) $linha['estoque'], (float) ($linha['peso_kg'] ?? 0)
+            (int) $linha['id'],
+            $linha['nome'],
+            (float) $linha['preco'],
+            (int) $linha['estoque'],
+            (float) ($linha['peso_kg'] ?? 0)
         );
     }
 }
